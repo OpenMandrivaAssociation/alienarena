@@ -4,7 +4,7 @@ Summary:	Multiplayer retro sci-fi deathmatch game
 Version:	7.51
 Release:	%mkrel 1
 License:	GPLv2+
-Group:		Amusements/Games
+Group:		Games/Arcade
 # Subversion:  https://svn.icculus.org/alienarena/trunk/?sortby=date
 # Upstream seems too inept to provide a simple source only tarball, so we use svn.
 #   svn export svn://svn.icculus.org/alienarena/tags/7.51/ alienarena-7.51/
