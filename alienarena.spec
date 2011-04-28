@@ -55,7 +55,7 @@ of play, loads of mutators, built-in bots, multiple player characters and weapon
 
 
 %package server
-Group:		Amusements/Games
+Group:		Games/Arcade
 Summary:	Dedicated server for alienarena, the FPS game
 Requires:	alienarena-data = 20110323
 
