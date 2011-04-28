@@ -41,7 +41,7 @@ BuildRequires:	libpng-devel
 BuildRequires:	libvorbis-devel
 BuildRequires:	openal-soft-devel
 BuildRequires:	ode-devel
-BuildRequires:	freetype-devel
+BuildRequires:	freetype2-devel
 BuildRequires:	desktop-file-utils
 Requires:	alienarena-data = 20110323
 Requires:	desktop-file-utils >= 0.9
@@ -92,13 +92,13 @@ sed -i "s|\"libopenal.so\"|\"$LIBOPENAL\"|g" source/unix/qal_unix.c
 %build
 export PTHREAD_LIBS="-lpthread"
 export PTHREAD_CFLAGS="-pthread" 
-%configure --with-system-libode --without-xf86dga
+%configure2_5x --with-system-libode --without-xf86dga
 %make
 
 
 %install
 rm -rf %{buildroot}
-make DESTDIR=%{buildroot} install
+%makeinstall_std
 
 %{__mkdir_p} %{buildroot}%{_datadir}/applications
 desktop-file-install --vendor "mandriva"			\
