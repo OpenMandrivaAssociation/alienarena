@@ -2,7 +2,7 @@
 Name:		alienarena
 Summary:	Multiplayer retro sci-fi deathmatch game
 Version:	7.51
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Games/Arcade
 # Subversion:  https://svn.icculus.org/alienarena/trunk/?sortby=date
@@ -101,7 +101,7 @@ rm -rf %{buildroot}
 %makeinstall_std
 
 %{__mkdir_p} %{buildroot}%{_datadir}/applications
-desktop-file-install --vendor "%{vendor}"			\
+desktop-file-install --vendor "%{_real_vendor}"			\
 	--dir %{buildroot}%{_datadir}/applications	\
 	%{SOURCE1}
 
