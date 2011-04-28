@@ -101,7 +101,7 @@ rm -rf %{buildroot}
 %makeinstall_std
 
 %{__mkdir_p} %{buildroot}%{_datadir}/applications
-desktop-file-install --vendor "mandriva"			\
+desktop-file-install --vendor "%{vendor}"			\
 	--dir %{buildroot}%{_datadir}/applications	\
 	%{SOURCE1}
 
