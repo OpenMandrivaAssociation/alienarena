@@ -1,8 +1,8 @@
 #Based on Fedora's package
 Name:		alienarena
 Summary:	Multiplayer retro sci-fi deathmatch game
-Version:	7.51
-Release:	%mkrel 2
+Version:	7.52
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Games/Arcade
 # Subversion:  https://svn.icculus.org/alienarena/trunk/?sortby=date
@@ -29,7 +29,7 @@ Patch3:		alienarena-7.45-no-qglBlitFramebufferEXT.patch
 Patch4:		alienarena-7.51-nodata.patch
 #Patch5:		alienarena-7.51-system-ode-double.patch
 URL:		http://red.planetarena.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 #BuildRequires:	libX11-devel 
 BuildRequires:	libxext-devel
 BuildRequires:	libxxf86vm-devel
@@ -43,7 +43,7 @@ BuildRequires:	openal-soft-devel
 BuildRequires:	ode-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	desktop-file-utils
-Requires:	alienarena-data = 20110323
+Requires:	alienarena-data = 20111014
 Requires:	desktop-file-utils >= 0.9
 Requires:	opengl-games-utils
 Requires:	openal
