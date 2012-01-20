@@ -1,7 +1,7 @@
 #Based on Fedora's package
 Name:		alienarena
 Summary:	Multiplayer retro sci-fi deathmatch game
-Version:	7.52
+Version:	7.53
 Release:	%mkrel 1
 License:	GPLv2+
 Group:		Games/Arcade
@@ -22,14 +22,12 @@ Group:		Games/Arcade
 #   tar -cvJf alienarena-data-20110323.tar.xz alienarena-data-20110323
 # This source tarball is used for the alienarena package
 #   tar -cvjf alienarena-7.51.tar.bz2 alienarena-7.51
-Source0:	alienarena-%{version}.tar.bz2
+Source0:	alienarena-%{version}.tar.xz
 Source1:	alienarena.desktop
 Source2:	GPL.acebot.txt
 Patch3:		alienarena-7.45-no-qglBlitFramebufferEXT.patch
 Patch4:		alienarena-7.51-nodata.patch
-#Patch5:		alienarena-7.51-system-ode-double.patch
 URL:		http://red.planetarena.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 #BuildRequires:	libX11-devel 
 BuildRequires:	libxext-devel
 BuildRequires:	libxxf86vm-devel
@@ -43,7 +41,7 @@ BuildRequires:	openal-soft-devel
 BuildRequires:	ode-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	desktop-file-utils
-Requires:	alienarena-data = 20111014
+Requires:	alienarena-data = 20120106
 Requires:	desktop-file-utils >= 0.9
 Requires:	opengl-games-utils
 Requires:	openal
@@ -57,7 +55,7 @@ of play, loads of mutators, built-in bots, multiple player characters and weapon
 %package server
 Group:		Games/Arcade
 Summary:	Dedicated server for alienarena, the FPS game
-Requires:	alienarena-data = 20110323
+Requires:	alienarena-data = 20120106
 
 
 %description server
@@ -73,21 +71,20 @@ This is the dedicated server.
 
 %patch3 -p1 -b .no-qglBlitFramebufferEXT
 %patch4 -p1 -b .nodata
-#%patch5 -p1 -b .ode-double
 
 # Copy license clarification for acebot
-cp -p %{SOURCE2} .
+%__cp -p %{SOURCE2} .
 
 # clean up prebuilt binary files
-[[ -e crx ]] && rm crded crx crx.sdl {arena,data1}/game.so
+[[ -e crx ]] && %__rm crded crx crx.sdl {arena,data1}/game.so
 
 # clean up end-line encoding
-[[ -e docs/README.txt ]] && %{__sed} -i 's/\r//' docs/README.txt
+[[ -e docs/README.txt ]] && %__sed -i 's/\r//' docs/README.txt
 
 # So, AlienArena now "uses" openal by dlopening the library, which is hardcoded to 
 # "libopenal.so". That file only lives in openal-devel, so we need to adjust the hardcoding.
 LIBOPENAL=`ls %{_libdir}/libopenal.so.? | cut -d "/" -f 4`
-sed -i "s|\"libopenal.so\"|\"$LIBOPENAL\"|g" source/unix/qal_unix.c
+%__sed -i "s|\"libopenal.so\"|\"$LIBOPENAL\"|g" source/unix/qal_unix.c
 
 %build
 export PTHREAD_LIBS="-lpthread"
@@ -97,36 +94,24 @@ export PTHREAD_CFLAGS="-pthread"
 
 
 %install
-rm -rf %{buildroot}
+%__rm -rf %{buildroot}
 %makeinstall_std
 
-%{__mkdir_p} %{buildroot}%{_datadir}/applications
+%__mkdir_p %{buildroot}%{_datadir}/applications
 desktop-file-install --vendor "%{_real_vendor}"			\
 	--dir %{buildroot}%{_datadir}/applications	\
 	%{SOURCE1}
 
-mkdir -p %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/
-mv %{buildroot}%{_datadir}/icons/%{name}.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%__mkdir_p %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/
+%__mv %{buildroot}%{_datadir}/icons/%{name}.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # opengl checker
-ln -s opengl-game-wrapper.sh %{buildroot}/%{_bindir}/%{name}-wrapper
-ln -s crx %{buildroot}/%{_bindir}/%{name}
-ln -s crx-ded %{buildroot}/%{_bindir}/%{name}-server
+%__ln_s opengl-game-wrapper.sh %{buildroot}/%{_bindir}/%{name}-wrapper
+%__ln_s crx %{buildroot}/%{_bindir}/%{name}
+%__ln_s crx-ded %{buildroot}/%{_bindir}/%{name}-server
 
 %clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post
-%update_menus
-%update_icon_cache hicolor
-%endif
-
-%if %mdkversion < 200900
-%postun
-%clean_menus
-%clean_icon_cache hicolor
-%endif
+%__rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
