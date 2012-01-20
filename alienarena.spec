@@ -106,26 +106,27 @@ desktop-file-install --vendor "%{_real_vendor}"			\
 %__mv %{buildroot}%{_datadir}/icons/%{name}.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # opengl checker
-%__ln_s opengl-game-wrapper.sh %{buildroot}/%{_bindir}/%{name}-wrapper
-%__ln_s crx %{buildroot}/%{_bindir}/%{name}
-%__ln_s crx-ded %{buildroot}/%{_bindir}/%{name}-server
+%__ln_s opengl-game-wrapper.sh %{buildroot}%{_bindir}/%{name}-wrapper
+%__ln_s crx %{buildroot}%{_bindir}/%{name}
+%__ln_s crx-ded %{buildroot}%{_bindir}/%{name}-server
+
+# clean docs as we don't want to package them twice
+%__rm -rf %{buildroot}%{_defaultdocdir}/%{name}
 
 %clean
 %__rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc GPL.acebot.txt
+%doc GPL.acebot.txt COPYING README
 %{_bindir}/crx
 %{_bindir}/%{name}
 %{_bindir}/%{name}-wrapper
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/32x32/apps/%{name}.png
-%{_defaultdocdir}/%{name}/
 
 %files server
 %defattr(-,root,root,-)
 %{_bindir}/crx-ded
 %{_bindir}/%{name}-server
-%{_defaultdocdir}/%{name}/
 
