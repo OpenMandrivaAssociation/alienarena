@@ -1,0 +1,21 @@
+diff -up alienarena-7.51/Makefile.in.nodata alienarena-7.51/Makefile.in
+--- alienarena-7.51/Makefile.in.nodata	2011-03-23 17:20:30.076470002 -0400
++++ alienarena-7.51/Makefile.in	2011-03-23 17:21:15.927470000 -0400
+@@ -3843,7 +3843,7 @@ distcleancheck: distclean
+ 	       exit 1; } >&2
+ check-am: all-am
+ check: check-recursive
+-all-am: Makefile $(DATA)
++all-am: Makefile
+ installdirs: installdirs-recursive
+ installdirs-am:
+ 	for dir in "$(DESTDIR)$(docdir)" "$(DESTDIR)$(icondir)" "$(DESTDIR)$(pkgdatadir)"; do \
+@@ -3896,7 +3896,7 @@ info: info-recursive
+ info-am:
+ 
+ install-data-am: install-data-local install-dist_docDATA \
+-	install-dist_iconDATA install-nobase_dist_pkgdataDATA
++	install-dist_iconDATA
+ 
+ install-dvi: install-dvi-recursive
+ 
