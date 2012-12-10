@@ -130,3 +130,29 @@ desktop-file-install --vendor "%{_real_vendor}"			\
 %{_bindir}/crx-ded
 %{_bindir}/%{name}-server
 
+
+
+%changelog
+* Fri Jan 20 2012 Andrey Bondrov <abondrov@mandriva.org> 7.53-1mdv2011.0
++ Revision: 762908
+- Fix file list (don't package same docs twice)
+- New version 7.53
+
+* Mon Oct 17 2011 Andrey Bondrov <abondrov@mandriva.org> 7.52-1
++ Revision: 704968
+- New version 7.52
+
+* Thu Apr 28 2011 Jani Välimaa <wally@mandriva.org> 7.51-2
++ Revision: 659805
+- use _real_vendor macro in desktop file name
+
+* Thu Apr 28 2011 Funda Wang <fwang@mandriva.org> 7.51-1
++ Revision: 659793
+- fix group
+- use vendor
+- fix br with freetype2
+
+  + Juan Luis Baptiste <juancho@mandriva.org>
+    - Fixed group.
+    - import alienarena
+

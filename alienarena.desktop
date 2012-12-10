@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Alien Arena
+Comment=Multiplayer retro sci-fi deathmatch
+Icon=alienarena
+Exec=alienarena-wrapper
+Terminal=false
+Type=Application
+Categories=Game;ArcadeGame;
