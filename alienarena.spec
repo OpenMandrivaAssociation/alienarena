@@ -2,7 +2,7 @@
 Name:		alienarena
 Summary:	Multiplayer retro sci-fi deathmatch game
 Version:	7.53
-Release:	%mkrel 1
+Release:	2
 License:	GPLv2+
 Group:		Games/Arcade
 # Subversion:  https://svn.icculus.org/alienarena/trunk/?sortby=date
