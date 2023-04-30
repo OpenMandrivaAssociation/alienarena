@@ -40,6 +40,8 @@ Requires:	desktop-file-utils
 #Requires:	opengl-games-utils
 Requires:	openal
 
+Requires:	alienarena-data = %{EVRD}
+
 %description
 Alien Arena 2011 is an online deathmatch game with over 30 levels, seven modes 
 of play, loads of mutators, built-in bots, multiple player characters and weapons
@@ -49,7 +51,7 @@ of play, loads of mutators, built-in bots, multiple player characters and weapon
 %package server
 Group:		Games/Arcade
 Summary:	Dedicated server for alienarena, the FPS game
-Requires:	alienarena-data = 20120106
+Requires:	alienarena-data = %{EVRD}
 
 
 %description server
@@ -59,6 +61,13 @@ of play, loads of mutators, built-in bots, multiple player characters and weapon
 
 This is the dedicated server.
 
+%package data
+Group:		Games/Arcade
+Summary:	Data files needed by both the client and server for Alienarena
+BuildArch:	noarch
+
+%description data
+Data files needed by both the client and server for Alienarena
 
 %prep
 %autosetup -p1
@@ -101,15 +110,15 @@ rm -rf %{buildroot}%{_defaultdocdir}/%{name}
 rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
 %doc GPL.acebot.txt
 %{_bindir}/%{name}
 %{_bindir}/%{name}-wrapper
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+
+%files data
 %{_datadir}/%{name}
 %{_datadir}/icons/alienarena
 
 %files server
-%defattr(-,root,root,-)
 %{_bindir}/alienarena-ded
