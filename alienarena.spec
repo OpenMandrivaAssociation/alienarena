@@ -1,3 +1,8 @@
+# source/unix/odesrc/ousrc/configure.ac explicitly references a number of files that don't exist
+%define _disable_rebuild_configure 1
+# -D_FORTIFY_SOURCE does #define dprintf -- but dprintf is used as a struct member here
+%global _fortify_cflags %{nil}
+
 Name:		alienarena
 Summary:	Multiplayer retro sci-fi deathmatch game
 Version:	7.71.4
@@ -12,6 +17,7 @@ Group:		Games/Arcade
 Source0:	alienarena-7.71.tar.xz
 Source1:	alienarena.desktop
 Source2:	GPL.acebot.txt
+Patch0:		alienarena-7.71.4-compile.patch
 URL:		https://www.alienarena.org
 
 BuildRequires:	automake
@@ -55,7 +61,7 @@ This is the dedicated server.
 
 
 %prep
-%autosetup -p1 -n %{name}-%{version}
+%autosetup -p1
 
 # Copy license clarification for acebot
 cp -p %{SOURCE2} .
@@ -68,72 +74,42 @@ cp -p %{SOURCE2} .
 LIBOPENAL=`ls %{_libdir}/libopenal.so.? | cut -d "/" -f 4`
 %__sed -i "s|\"libopenal.so\"|\"$LIBOPENAL\"|g" source/unix/qal_unix.c
 
-%build
-autoreconf -i
-export PTHREAD_LIBS="-lpthread"
 export PTHREAD_CFLAGS="-pthread"
 %configure
+
+%build
 %make_build
 
 %install
 %make_install
 
-%__mkdir_p %{buildroot}%{_datadir}/applications
-desktop-file-install --vendor "%{_real_vendor}"			\
+mkdir -p %{buildroot}%{_datadir}/applications
+desktop-file-install --vendor "%{_vendor}"		\
 	--dir %{buildroot}%{_datadir}/applications	\
 	%{SOURCE1}
 
-%__mkdir_p %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/
-%__mv %{buildroot}%{_datadir}/icons/%{name}.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+mkdir -p %{buildroot}%{_datadir}/icons/hicolor/32x32/apps/
+mv unix_dist/alien-arena.png %{buildroot}/%{_datadir}/icons/hicolor/32x32/apps/%{name}.png
 
 # opengl checker
-%__ln_s opengl-game-wrapper.sh %{buildroot}%{_bindir}/%{name}-wrapper
-%__ln_s crx %{buildroot}%{_bindir}/%{name}
-%__ln_s crx-ded %{buildroot}%{_bindir}/%{name}-server
+ln -s opengl-game-wrapper.sh %{buildroot}%{_bindir}/%{name}-wrapper
 
 # clean docs as we don't want to package them twice
-%__rm -rf %{buildroot}%{_defaultdocdir}/%{name}
+rm -rf %{buildroot}%{_defaultdocdir}/%{name}
 
 %clean
-%__rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-%doc GPL.acebot.txt COPYING README
-%{_bindir}/crx
+%doc GPL.acebot.txt
 %{_bindir}/%{name}
 %{_bindir}/%{name}-wrapper
 %{_datadir}/applications/*.desktop
 %{_datadir}/icons/hicolor/32x32/apps/%{name}.png
+%{_datadir}/%{name}
+%{_datadir}/icons/alienarena
 
 %files server
 %defattr(-,root,root,-)
-%{_bindir}/crx-ded
-%{_bindir}/%{name}-server
-
-
-
-%changelog
-* Fri Jan 20 2012 Andrey Bondrov <abondrov@mandriva.org> 7.53-1mdv2011.0
-+ Revision: 762908
-- Fix file list (don't package same docs twice)
-- New version 7.53
-
-* Mon Oct 17 2011 Andrey Bondrov <abondrov@mandriva.org> 7.52-1
-+ Revision: 704968
-- New version 7.52
-
-* Thu Apr 28 2011 Jani Välimaa <wally@mandriva.org> 7.51-2
-+ Revision: 659805
-- use _real_vendor macro in desktop file name
-
-* Thu Apr 28 2011 Funda Wang <fwang@mandriva.org> 7.51-1
-+ Revision: 659793
-- fix group
-- use vendor
-- fix br with freetype2
-
-  + Juan Luis Baptiste <juancho@mandriva.org>
-    - Fixed group.
-    - import alienarena
-
+%{_bindir}/alienarena-ded
