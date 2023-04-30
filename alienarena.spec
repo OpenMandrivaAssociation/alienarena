@@ -14,6 +14,9 @@ Source1:	alienarena.desktop
 Source2:	GPL.acebot.txt
 URL:		https://www.alienarena.org
 
+BuildRequires:	automake
+BuildRequires:	libtool
+BuildRequires:	autoconf
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xxf86vm)
 BuildRequires:	pkgconfig(libjpeg)
