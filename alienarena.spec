@@ -69,7 +69,7 @@ LIBOPENAL=`ls %{_libdir}/libopenal.so.? | cut -d "/" -f 4`
 %__sed -i "s|\"libopenal.so\"|\"$LIBOPENAL\"|g" source/unix/qal_unix.c
 
 %build
-autoreconf -vfi
+autoreconf -i
 export PTHREAD_LIBS="-lpthread"
 export PTHREAD_CFLAGS="-pthread"
 %configure
