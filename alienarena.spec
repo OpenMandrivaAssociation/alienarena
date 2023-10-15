@@ -3,9 +3,12 @@
 # -D_FORTIFY_SOURCE does #define dprintf -- but dprintf is used as a struct member here
 %global _fortify_cflags %{nil}
 
+# revision 5772 = 7.71.6 release tag
+%define	svn 5772
+
 Name:		alienarena
 Summary:	Multiplayer retro sci-fi deathmatch game
-Version:	7.71.4
+Version:	7.71.6
 Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
@@ -13,8 +16,11 @@ Group:		Games/Arcade
 # svn checkout svn://svn.icculus.org/alienarena/trunk alienarena
 # or
 # svn export svn://svn.icculus.org/alienarena/trunk alienarena-7.71.4
+# or if you want get specific revision
+# preffered way
+# svn checkout -r 5772 svn://svn.icculus.org/alienarena/trunk alienarena-7.71.6
 
-Source0:	alienarena-7.71.tar.xz
+Source0:	alienarena-7.71.6.tar.xz
 Source1:	alienarena.desktop
 Source2:	GPL.acebot.txt
 Patch0:		alienarena-7.71.4-compile.patch
@@ -35,7 +41,6 @@ BuildRequires:	pkgconfig(openal)
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	desktop-file-utils
 
-
 Requires:	desktop-file-utils
 #Requires:	opengl-games-utils
 Requires:	openal
@@ -47,12 +52,10 @@ Alien Arena 2011 is an online deathmatch game with over 30 levels, seven modes
 of play, loads of mutators, built-in bots, multiple player characters and weapons
 (with alt-fire modes).
 
-
 %package server
 Group:		Games/Arcade
 Summary:	Dedicated server for alienarena, the FPS game
 Requires:	alienarena-data = %{EVRD}
-
 
 %description server
 Alien Arena 2011 is an online deathmatch game with over 30 levels, seven modes
