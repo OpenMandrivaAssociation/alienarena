@@ -2,6 +2,7 @@
 %define _disable_rebuild_configure 1
 # -D_FORTIFY_SOURCE does #define dprintf -- but dprintf is used as a struct member here
 %global _fortify_cflags %{nil}
+%global optflags %{optflags} -Wno-error -Wno-implicit-function-declaration
 
 # revision 5772 = 7.71.6 release tag
 %define	svn 5772
