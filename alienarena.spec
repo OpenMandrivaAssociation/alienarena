@@ -23,7 +23,7 @@ Group:		Games/Arcade
 Source0:	alienarena-7.71.6.tar.xz
 Source1:	alienarena.desktop
 Source2:	GPL.acebot.txt
-Patch0:		alienarena-7.71.4-compile.patch
+#Patch0:		alienarena-7.71.4-compile.patch
 URL:		https://www.alienarena.org
 
 BuildRequires:	automake
