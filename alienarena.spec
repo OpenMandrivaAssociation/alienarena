@@ -20,6 +20,8 @@ Source2:	GPL.acebot.txt
 Patch0:		alienarena-7.71.7-compile.patch
 URL:		https://www.alienarena.org
 
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	automake
 BuildRequires:	libtool
 BuildRequires:	autoconf
