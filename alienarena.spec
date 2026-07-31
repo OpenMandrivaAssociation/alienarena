@@ -5,7 +5,7 @@
 
 Name:		alienarena
 Summary:	Multiplayer retro sci-fi deathmatch game
-Version:	7.71.7
+Version:	7.72.1
 Release:	1
 License:	GPLv2+
 Group:		Games/Arcade
@@ -17,7 +17,7 @@ Group:		Games/Arcade
 Source0:	https://github.com/alienarena/alienarena/archive/refs/tags/%{version}.tar.gz
 Source1:	alienarena.desktop
 Source2:	GPL.acebot.txt
-Patch0:		alienarena-7.71.7-compile.patch
+# dropped (no longer applies): Patch0:		alienarena-7.72.1-compile.patch
 URL:		https://www.alienarena.org
 
 BuildRequires:	libtool-base
