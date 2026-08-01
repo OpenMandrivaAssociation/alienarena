@@ -20,6 +20,7 @@ Source2:	GPL.acebot.txt
 # dropped (no longer applies): Patch0:		alienarena-7.72.1-compile.patch
 URL:		https://www.alienarena.org
 
+BuildRequires:  make
 BuildRequires:	libtool-base
 BuildRequires:	slibtool
 BuildRequires:	automake
